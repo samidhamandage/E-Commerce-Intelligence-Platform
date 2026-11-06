@@ -1,6 +1,11 @@
+import os
+from pathlib import Path
 from typing import List, Union
 from pydantic import AnyHttpUrl, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+_BACKEND_DIR = Path(__file__).resolve().parent.parent.parent
+_ENV_FILE = _BACKEND_DIR / ".env"
 
 
 class Settings(BaseSettings):
@@ -11,11 +16,11 @@ class Settings(BaseSettings):
 
     # Database
     POSTGRES_SERVER: str = "localhost"
-    POSTGRES_PORT: int = 5432
+    POSTGRES_PORT: int = 5433
     POSTGRES_USER: str = "postgres"
     POSTGRES_PASSWORD: str = "postgres"
     POSTGRES_DB: str = "ecommerce_intelligence"
-    DATABASE_URL: str = "postgresql://postgres:postgres@localhost:5432/ecommerce_intelligence"
+    DATABASE_URL: str = "postgresql://postgres:postgres@localhost:5433/ecommerce_intelligence"
 
     # Security
     SECRET_KEY: str = "development-secret-key-32-chars-minimum-needed-prod"
@@ -44,7 +49,7 @@ class Settings(BaseSettings):
         return []
 
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file=(_ENV_FILE, ".env"),
         env_file_encoding="utf-8",
         case_sensitive=True,
         extra="ignore"
