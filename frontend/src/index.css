@@ -3,9 +3,140 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --bg-main: #F8FAFC;
+    --bg-secondary: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --text-primary: #0F172A;
+    --text-secondary: #64748B;
+    --border-color: #E2E8F0;
+    --primary-accent: #4F46E5;
+    --secondary-accent: #0891B2;
+  }
+
+  html.dark {
+    --bg-main: #0B1120;
+    --bg-secondary: #111827;
+    --bg-card: #172033;
+    --text-primary: #F8FAFC;
+    --text-secondary: #94A3B8;
+    --border-color: #263449;
+    --primary-accent: #6366F1;
+    --secondary-accent: #06B6D4;
+  }
+
   body {
-    @apply bg-slate-950 text-slate-100 min-h-screen selection:bg-indigo-600 selection:text-white;
+    min-height: 100vh;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Light Theme Slate Adapters for Dashboard Pages */
+html:not(.dark) .bg-slate-900\/60,
+html:not(.dark) .bg-slate-900\/70,
+html:not(.dark) .bg-slate-900\/80,
+html:not(.dark) .bg-slate-900 {
+  background-color: #FFFFFF;
+}
+
+html:not(.dark) .border-slate-800,
+html:not(.dark) .border-slate-800\/60,
+html:not(.dark) .border-slate-800\/80 {
+  border-color: #E2E8F0;
+}
+
+html:not(.dark) .bg-slate-950,
+html:not(.dark) .bg-slate-950\/40,
+html:not(.dark) .bg-slate-950\/60,
+html:not(.dark) .bg-slate-950\/80 {
+  background-color: #F8FAFC;
+}
+
+html:not(.dark) .bg-slate-800 {
+  background-color: #F1F5F9;
+}
+
+html:not(.dark) .bg-slate-800\/60,
+html:not(.dark) .bg-slate-800\/70 {
+  background-color: #F1F5F9;
+}
+
+/* Global Recharts Theme Synchronization */
+html:not(.dark) .recharts-cartesian-grid-horizontal line,
+html:not(.dark) .recharts-cartesian-grid-vertical line {
+  stroke: #E2E8F0 !important;
+}
+html.dark .recharts-cartesian-grid-horizontal line,
+html.dark .recharts-cartesian-grid-vertical line {
+  stroke: #263449 !important;
+}
+
+html:not(.dark) .recharts-text {
+  fill: #64748B !important;
+}
+html.dark .recharts-text {
+  fill: #94A3B8 !important;
+}
+
+html:not(.dark) .recharts-default-tooltip {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  color: #0F172A !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  border-radius: 0.5rem !important;
+}
+html.dark .recharts-default-tooltip {
+  background-color: #172033 !important;
+  border-color: #263449 !important;
+  color: #F8FAFC !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3) !important;
+  border-radius: 0.5rem !important;
+}
+
+html:not(.dark) .recharts-tooltip-label {
+  color: #0F172A !important;
+  font-weight: 600 !important;
+}
+html.dark .recharts-tooltip-label {
+  color: #F8FAFC !important;
+  font-weight: 600 !important;
+}
+
+html:not(.dark) .recharts-tooltip-item {
+  color: #334155 !important;
+}
+html.dark .recharts-tooltip-item {
+  color: #94A3B8 !important;
+}
+
+/* Subtle entrance animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal-on-scroll {
+  animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  html {
+    scroll-behavior: auto !important;
   }
 }
 
@@ -14,13 +145,23 @@
   width: 6px;
   height: 6px;
 }
-::-webkit-scrollbar-track {
-  background: #090d16;
+html.dark ::-webkit-scrollbar-track {
+  background: #0B1120;
 }
-::-webkit-scrollbar-thumb {
-  background: #1e293b;
+html:not(.dark) ::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+html.dark ::-webkit-scrollbar-thumb {
+  background: #263449;
   border-radius: 3px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+html:not(.dark) ::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 3px;
+}
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #3B4F6D;
+}
+html:not(.dark) ::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
 }

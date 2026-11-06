@@ -47,13 +47,13 @@ export const DataQuality: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-slate-800">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-slate-200 dark:border-[#263449]">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-2">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20 mb-2">
             Real Schema & Dataset Audit
           </div>
-          <h2 className="text-xl font-bold text-white tracking-tight">Data Quality & Schema Health</h2>
-          <p className="text-xs text-slate-400 mt-0.5">
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">Data Quality & Schema Health</h2>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             Verifies raw CSV immutability, relational table existence, row counts, and column null rates.
           </p>
         </div>
@@ -61,7 +61,7 @@ export const DataQuality: React.FC = () => {
         <button
           onClick={() => refetch()}
           disabled={isLoading}
-          className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-medium rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors disabled:opacity-50"
+          className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition-colors shadow-sm disabled:opacity-50"
         >
           <RefreshCw className={`h-3.5 w-3.5 ${isLoading ? 'animate-spin' : ''}`} />
           Refresh Audit
@@ -102,12 +102,12 @@ export const DataQuality: React.FC = () => {
 
       {/* Warnings / Pipeline Alerts */}
       {report && report.warnings.length > 0 && (
-        <div className="p-4 rounded-xl bg-amber-950/20 border border-amber-900/40 text-amber-200 text-xs space-y-2">
-          <div className="flex items-center gap-2 font-semibold text-amber-300">
-            <AlertTriangle className="h-4 w-4 text-amber-400" />
+        <div className="p-4 rounded-xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/40 text-amber-800 dark:text-amber-200 text-xs space-y-2">
+          <div className="flex items-center gap-2 font-semibold text-amber-900 dark:text-amber-300">
+            <AlertTriangle className="h-4 w-4 text-amber-500" />
             <span>Pipeline Audit Notices ({report.warnings.length})</span>
           </div>
-          <ul className="list-disc list-inside space-y-1 text-amber-300/80 pl-1">
+          <ul className="list-disc list-inside space-y-1 text-amber-700 dark:text-amber-300/80 pl-1">
             {report.warnings.map((warn, i) => (
               <li key={i}>{warn}</li>
             ))}
@@ -116,22 +116,22 @@ export const DataQuality: React.FC = () => {
       )}
 
       {/* Database Tables Audit Table */}
-      <div className="bg-slate-900/60 border border-slate-800 rounded-2xl overflow-hidden">
-        <div className="p-5 border-b border-slate-800 flex items-center justify-between">
+      <div className="bg-white dark:bg-[#172033]/60 border border-slate-200 dark:border-[#263449] rounded-2xl overflow-hidden shadow-sm">
+        <div className="p-5 border-b border-slate-200 dark:border-[#263449] flex items-center justify-between">
           <div>
-            <h3 className="text-sm font-semibold text-white">PostgreSQL Schema Tables</h3>
-            <p className="text-[11px] text-slate-400 mt-0.5">
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white">PostgreSQL Schema Tables</h3>
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
               Click a table to inspect column data types, nullability, and verified null rates.
             </p>
           </div>
-          <span className="text-xs text-slate-400 font-mono">
+          <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">
             {report?.tables.length ?? 0} Tables Registered
           </span>
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs text-slate-300">
-            <thead className="bg-slate-950/80 text-[11px] uppercase tracking-wider text-slate-400 border-b border-slate-800">
+          <table className="w-full text-left text-xs text-slate-700 dark:text-slate-300">
+            <thead className="bg-slate-50 dark:bg-[#0B1120]/80 text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-[#263449]">
               <tr>
                 <th className="py-3 px-4">Table Name</th>
                 <th className="py-3 px-4">Row Count</th>
@@ -141,35 +141,35 @@ export const DataQuality: React.FC = () => {
                 <th className="py-3 px-4 text-right">Details</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/60">
+            <tbody className="divide-y divide-slate-200/80 dark:divide-slate-800/60">
               {report?.tables.map((table) => {
                 const isExpanded = expandedTable === table.table_name;
                 return (
                   <React.Fragment key={table.table_name}>
                     <tr
                       onClick={() => toggleExpand(table.table_name)}
-                      className="hover:bg-slate-800/40 cursor-pointer transition-colors"
+                      className="hover:bg-slate-50 dark:hover:bg-slate-800/40 cursor-pointer transition-colors"
                     >
-                      <td className="py-3.5 px-4 font-mono font-medium text-white flex items-center gap-2">
-                        <Database className="h-3.5 w-3.5 text-indigo-400" />
+                      <td className="py-3.5 px-4 font-mono font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                        <Database className="h-3.5 w-3.5 text-indigo-500" />
                         {table.table_name}
                       </td>
                       <td className="py-3.5 px-4 font-mono">
                         {table.row_count.toLocaleString()}
                       </td>
-                      <td className="py-3.5 px-4 font-mono text-slate-400">
+                      <td className="py-3.5 px-4 font-mono text-slate-500 dark:text-slate-400">
                         {table.column_count}
                       </td>
                       <td className="py-3.5 px-4">
                         <div className="flex items-center gap-2">
-                          <div className="w-24 bg-slate-800 rounded-full h-1.5 overflow-hidden">
+                          <div className="w-24 bg-slate-200 dark:bg-slate-800 rounded-full h-1.5 overflow-hidden">
                             <div
                               className={`h-full ${
                                 table.completeness_score > 90
                                   ? 'bg-emerald-500'
                                   : table.completeness_score > 50
                                   ? 'bg-amber-500'
-                                  : 'bg-slate-700'
+                                  : 'bg-slate-400 dark:bg-slate-700'
                               }`}
                               style={{ width: `${table.completeness_score}%` }}
                             />
@@ -195,7 +195,7 @@ export const DataQuality: React.FC = () => {
                       <td className="py-3.5 px-4 text-right">
                         <button
                           type="button"
-                          className="p-1 rounded text-slate-400 hover:text-white"
+                          className="p-1 rounded text-slate-400 hover:text-slate-900 dark:hover:text-white"
                         >
                           {isExpanded ? (
                             <ChevronUp className="h-4 w-4" />
@@ -208,28 +208,28 @@ export const DataQuality: React.FC = () => {
 
                     {/* Column drilldown */}
                     {isExpanded && (
-                      <tr className="bg-slate-950/60">
+                      <tr className="bg-slate-50/70 dark:bg-[#0B1120]/60">
                         <td colSpan={6} className="p-4">
-                          <div className="rounded-lg border border-slate-800 bg-slate-900/80 p-4">
-                            <h4 className="text-xs font-semibold text-slate-200 mb-3">
-                              Column Schema & Integrity Metrics: <span className="font-mono text-indigo-400">{table.table_name}</span>
+                          <div className="rounded-lg border border-slate-200 dark:border-[#263449] bg-white dark:bg-[#111827]/80 p-4 shadow-sm">
+                            <h4 className="text-xs font-semibold text-slate-900 dark:text-slate-200 mb-3">
+                              Column Schema & Integrity Metrics: <span className="font-mono text-indigo-600 dark:text-indigo-400">{table.table_name}</span>
                             </h4>
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 text-xs">
                               {table.columns.map((col) => (
                                 <div
                                   key={col.name}
-                                  className="p-2.5 rounded-lg bg-slate-950 border border-slate-800/80 flex flex-col justify-between"
+                                  className="p-2.5 rounded-lg bg-slate-50 dark:bg-[#0B1120] border border-slate-200 dark:border-[#263449]/80 flex flex-col justify-between"
                                 >
                                   <div className="flex items-center justify-between">
-                                    <span className="font-mono text-slate-200 truncate">{col.name}</span>
-                                    <span className="text-[10px] text-slate-400 uppercase font-mono">
+                                    <span className="font-mono font-medium text-slate-900 dark:text-slate-200 truncate">{col.name}</span>
+                                    <span className="text-[10px] text-slate-500 uppercase font-mono">
                                       {col.data_type}
                                     </span>
                                   </div>
-                                  <div className="mt-2 flex items-center justify-between text-[11px] text-slate-400">
+                                  <div className="mt-2 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
                                     <span>Nullable: {col.nullable ? 'Yes' : 'No (Required)'}</span>
                                     {table.row_count > 0 && (
-                                      <span className="font-mono text-slate-300">
+                                      <span className="font-mono text-slate-700 dark:text-slate-300">
                                         Null: {col.null_count} ({col.null_percentage}%)
                                       </span>
                                     )}
@@ -250,11 +250,11 @@ export const DataQuality: React.FC = () => {
       </div>
 
       {/* Raw Files Audit Section */}
-      <div className="bg-slate-900/60 border border-slate-800 rounded-2xl overflow-hidden">
-        <div className="p-5 border-b border-slate-800">
-          <h3 className="text-sm font-semibold text-white">Raw File Immutability & Presence</h3>
-          <p className="text-[11px] text-slate-400 mt-0.5">
-            Physical files tracked in <code className="text-indigo-400">data/raw/</code> for immutable ETL processing.
+      <div className="bg-white dark:bg-[#172033]/60 border border-slate-200 dark:border-[#263449] rounded-2xl overflow-hidden shadow-sm">
+        <div className="p-5 border-b border-slate-200 dark:border-[#263449]">
+          <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Raw File Immutability & Presence</h3>
+          <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+            Physical files tracked in <code className="text-indigo-600 dark:text-indigo-400">data/raw/</code> for immutable ETL processing.
           </p>
         </div>
 
@@ -262,17 +262,17 @@ export const DataQuality: React.FC = () => {
           {report?.raw_files.map((file) => (
             <div
               key={file.filename}
-              className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-between gap-2"
+              className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#0B1120] border border-slate-200 dark:border-[#263449] flex items-center justify-between gap-2"
             >
               <div className="flex items-center gap-2.5 truncate">
                 {file.exists ? (
-                  <CheckCircle className="h-4 w-4 text-emerald-400 flex-shrink-0" />
+                  <CheckCircle className="h-4 w-4 text-emerald-500 flex-shrink-0" />
                 ) : (
                   <XCircle className="h-4 w-4 text-slate-400 flex-shrink-0" />
                 )}
                 <div className="flex flex-col truncate">
-                  <span className="text-xs font-mono text-slate-200 truncate">{file.filename}</span>
-                  <span className="text-[10px] text-slate-400">{file.size_readable}</span>
+                  <span className="text-xs font-mono font-medium text-slate-800 dark:text-slate-200 truncate">{file.filename}</span>
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400">{file.size_readable}</span>
                 </div>
               </div>
 

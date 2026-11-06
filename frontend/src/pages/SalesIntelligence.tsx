@@ -86,13 +86,13 @@ export const SalesIntelligence: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-slate-800">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-slate-200 dark:border-[#263449]">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mb-2">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/20 mb-2">
             Sales Intelligence
           </div>
-          <h2 className="text-xl font-bold text-white tracking-tight">Sales Performance Overview</h2>
-          <p className="text-xs text-slate-400 mt-0.5">Revenue trajectory, order volume, and geographic distributions.</p>
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">Sales Performance Overview</h2>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Revenue trajectory, order volume, and geographic distributions.</p>
         </div>
       </div>
 
@@ -122,10 +122,10 @@ export const SalesIntelligence: React.FC = () => {
       </div>
 
       {/* Monthly Revenue Area Chart */}
-      <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-5">
-        <h3 className="text-sm font-semibold text-white mb-4">Monthly Revenue Trend</h3>
+      <div className="bg-white dark:bg-[#172033]/60 border border-slate-200 dark:border-[#263449] rounded-2xl p-5 shadow-sm">
+        <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">Monthly Revenue Trend</h3>
         {monthly.length === 0 ? (
-          <p className="text-xs text-slate-400">No monthly data available.</p>
+          <p className="text-xs text-slate-500 dark:text-slate-400">No monthly data available.</p>
         ) : (
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
@@ -136,12 +136,10 @@ export const SalesIntelligence: React.FC = () => {
                     <stop offset="95%" stopColor="#6366f1" stopOpacity={0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-                <XAxis dataKey="month" tick={{ fill: '#94a3b8', fontSize: 11 }} tickLine={false} axisLine={false} />
-                <YAxis tick={{ fill: '#94a3b8', fontSize: 11 }} tickLine={false} axisLine={false} tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} />
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="month" tickLine={false} axisLine={false} />
+                <YAxis tickLine={false} axisLine={false} tickFormatter={(v) => `$${(v / 1000).toFixed(0)}k`} />
                 <Tooltip
-                  contentStyle={{ background: '#1e293b', border: '1px solid #334155', borderRadius: 8, fontSize: 12 }}
-                  labelStyle={{ color: '#e2e8f0' }}
                   formatter={(v: number) => [fmtCurrency(v), 'Revenue']}
                 />
                 <Area type="monotone" dataKey="revenue" stroke="#6366f1" strokeWidth={2} fill="url(#revenueGrad)" />
@@ -154,10 +152,10 @@ export const SalesIntelligence: React.FC = () => {
       {/* State & Category charts row */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Revenue by State */}
-        <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-5">
-          <h3 className="text-sm font-semibold text-white mb-4">Revenue by State (Top 10)</h3>
+        <div className="bg-white dark:bg-[#172033]/60 border border-slate-200 dark:border-[#263449] rounded-2xl p-5 shadow-sm">
+          <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">Revenue by State (Top 10)</h3>
           {byState.length === 0 ? (
-            <p className="text-xs text-slate-400">No state data available.</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400">No state data available.</p>
           ) : (
             <div className="h-64">
               <ResponsiveContainer width="100%" height="100%">

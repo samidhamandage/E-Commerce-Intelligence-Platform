@@ -14,11 +14,11 @@ export const LoadingState: React.FC<LoadingStateProps> = ({
 }) => {
   return (
     <div
-      className={`flex flex-col items-center justify-center p-12 text-center rounded-xl border border-slate-800 bg-slate-900/50 backdrop-blur-sm ${className}`}
+      className={`flex flex-col items-center justify-center p-12 text-center rounded-xl border border-slate-200 dark:border-[#263449] bg-white dark:bg-[#172033]/60 shadow-sm backdrop-blur-sm transition-colors duration-200 ${className}`}
     >
       <Loader2 className="h-9 w-9 text-indigo-500 animate-spin mb-4" />
-      <h3 className="text-base font-semibold text-slate-200">{message}</h3>
-      {subtext && <p className="text-xs text-slate-400 mt-1 max-w-sm">{subtext}</p>}
+      <h3 className="text-base font-semibold text-slate-900 dark:text-slate-200">{message}</h3>
+      {subtext && <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-sm">{subtext}</p>}
     </div>
   );
 };

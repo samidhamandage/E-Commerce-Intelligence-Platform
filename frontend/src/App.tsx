@@ -1,8 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './hooks/useAuth';
+import { ThemeProvider } from './hooks/useTheme';
 import { MainLayout } from './layouts/MainLayout';
 import { Login } from './pages/Login';
+import { SignUp } from './pages/SignUp';
+import { LandingPage } from './pages/LandingPage';
 import { ExecutiveOverview } from './pages/ExecutiveOverview';
 import { DataQuality } from './pages/DataQuality';
 import { Settings } from './pages/Settings';
@@ -24,7 +27,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-400 text-xs font-mono">
+      <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#0B1120] flex items-center justify-center text-slate-500 dark:text-slate-400 text-xs font-mono">
         Authenticating session...
       </div>
     );
@@ -37,72 +40,75 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
   return <>{children}</>;
 };
 
+const RootRoute: React.FC = () => {
+  const { isAuthenticated, isLoading } = useAuth();
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#0B1120] flex items-center justify-center text-slate-500 dark:text-slate-400 text-xs font-mono">
+        Loading platform...
+      </div>
+    );
+  }
+
+  if (isAuthenticated) {
+    return (
+      <MainLayout>
+        <ExecutiveOverview />
+      </MainLayout>
+    );
+  }
+
+  return <LandingPage />;
+};
+
 export const App: React.FC = () => {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<Login />} />
+    <ThemeProvider>
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            {/* Public Landing Page */}
+            <Route path="/landing" element={<LandingPage />} />
 
-          {/* Protected Platform Shell */}
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <MainLayout />
-              </ProtectedRoute>
-            }
-          >
-            {/* 1. Executive Overview */}
-            <Route index element={<ExecutiveOverview />} />
+            {/* Authentication Pages */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/register" element={<Navigate to="/signup" replace />} />
 
-            {/* 2. Sales Intelligence */}
-            <Route path="sales" element={<SalesIntelligence />} />
+            {/* Root index route: shows Landing Page when logged out, Executive Overview when logged in */}
+            <Route path="/" element={<RootRoute />} />
 
-            {/* 3. Customer Intelligence */}
-            <Route path="customers" element={<CustomerIntelligence />} />
+            {/* Protected Platform Shell */}
+            <Route
+              element={
+                <ProtectedRoute>
+                  <MainLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route path="/overview" element={<ExecutiveOverview />} />
+              <Route path="/sales" element={<SalesIntelligence />} />
+              <Route path="/customers" element={<CustomerIntelligence />} />
+              <Route path="/rfm" element={<RFMSegmentation />} />
+              <Route path="/customer-risk" element={<CustomerEngagementRisk />} />
+              <Route path="/products" element={<ProductIntelligence />} />
+              <Route path="/sellers" element={<SellerAnalytics />} />
+              <Route path="/delivery" element={<DeliveryAndSatisfaction />} />
+              <Route path="/payments" element={<PaymentIntelligence />} />
+              <Route path="/forecasting" element={<SalesForecast />} />
+              <Route path="/model-performance" element={<ModelPerformance />} />
+              <Route path="/data-quality" element={<DataQuality />} />
+              <Route path="/data-explorer" element={<DataExplorer />} />
+              <Route path="/insights" element={<BusinessInsights />} />
+              <Route path="/settings" element={<Settings />} />
+            </Route>
 
-            {/* 4. RFM Segmentation */}
-            <Route path="rfm" element={<RFMSegmentation />} />
-
-            {/* 5. Customer Engagement Risk */}
-            <Route path="customer-risk" element={<CustomerEngagementRisk />} />
-
-            {/* 6. Product Intelligence */}
-            <Route path="products" element={<ProductIntelligence />} />
-
-            {/* 7. Seller Intelligence */}
-            <Route path="sellers" element={<SellerAnalytics />} />
-
-            {/* 8. Delivery & Satisfaction */}
-            <Route path="delivery" element={<DeliveryAndSatisfaction />} />
-
-            {/* 9. Payment Intelligence */}
-            <Route path="payments" element={<PaymentIntelligence />} />
-
-            {/* 10. Forecasting */}
-            <Route path="forecasting" element={<SalesForecast />} />
-
-            {/* 11. Model Performance */}
-            <Route path="model-performance" element={<ModelPerformance />} />
-
-            {/* 12. Data Quality (Live) */}
-            <Route path="data-quality" element={<DataQuality />} />
-
-            {/* 13. Data Explorer */}
-            <Route path="data-explorer" element={<DataExplorer />} />
-
-            {/* 14. Business Insights */}
-            <Route path="insights" element={<BusinessInsights />} />
-
-            {/* 15. Settings */}
-            <Route path="settings" element={<Settings />} />
-          </Route>
-
-          {/* Catch-all redirect */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </BrowserRouter>
-    </AuthProvider>
+            {/* Catch-all redirect */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
+    </ThemeProvider>
   );
 };

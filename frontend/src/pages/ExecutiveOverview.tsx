@@ -37,7 +37,6 @@ export const ExecutiveOverview: React.FC = () => {
     );
   }
 
-
   const isDbConnected = health?.database?.connected ?? false;
   const totalTables = dq?.total_tables ?? 9;
   const populatedTables = dq?.populated_tables ?? 0;
@@ -48,13 +47,13 @@ export const ExecutiveOverview: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header Banner */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-slate-800">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-slate-200 dark:border-[#263449]">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mb-2">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/20 mb-2">
             Stage 1: Production Foundation
           </div>
-          <h2 className="text-xl font-bold text-white tracking-tight">Executive Platform Overview</h2>
-          <p className="text-xs text-slate-400 mt-0.5">
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">Executive Platform Overview</h2>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
             Real-time telemetry and database architecture for the Brazilian E-Commerce Intelligence Platform.
           </p>
         </div>
@@ -62,7 +61,7 @@ export const ExecutiveOverview: React.FC = () => {
         <div className="flex items-center gap-3">
           <Link
             to="/data-quality"
-            className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-medium rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition-colors shadow-sm shadow-indigo-900/30"
+            className="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white transition-colors shadow-sm shadow-indigo-600/20"
           >
             <FileCheck2 className="h-4 w-4" />
             Inspect Data Quality
@@ -105,50 +104,50 @@ export const ExecutiveOverview: React.FC = () => {
 
       {/* Empty State / Notice when tables are unpopulated (Strictly No Mock Data) */}
       {totalRecords === 0 ? (
-        <div className="bg-slate-900/70 border border-slate-800 rounded-2xl p-6 sm:p-8">
+        <div className="bg-white dark:bg-[#172033]/70 border border-slate-200 dark:border-[#263449] rounded-2xl p-6 sm:p-8 shadow-sm">
           <EmptyState
             title="Database Initialized — Awaiting Stage 2 Ingestion"
             description="The platform foundation, PostgreSQL schema (9 Olist models + user authentication), Alembic migrations, and FastAPI REST endpoints are fully operational. In accordance with production integrity standards, no fake charts, simulated metrics, or hard-coded KPIs are rendered."
             stageBadge="Production Foundation Verified"
             actionText="View Data Quality Audit"
             actionLink="/data-quality"
-            icon={<Database className="h-7 w-7 text-indigo-400" />}
+            icon={<Database className="h-7 w-7 text-indigo-500" />}
           />
 
-          <div className="mt-6 pt-6 border-t border-slate-800/80 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800">
-              <span className="font-semibold text-slate-200 block mb-1">1. Raw Dataset Status</span>
-              <p className="text-slate-400 text-[11px] leading-relaxed">
-                {rawFilesFound}/{rawFilesTotal} raw CSV files detected in <code className="text-indigo-400">data/raw/</code>. Use <code className="text-slate-300">scripts/download_dataset.py</code> to download Olist data.
+          <div className="mt-6 pt-6 border-t border-slate-200 dark:border-[#263449]/80 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+            <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#0B1120] border border-slate-200 dark:border-[#263449]">
+              <span className="font-semibold text-slate-800 dark:text-slate-200 block mb-1">1. Raw Dataset Status</span>
+              <p className="text-slate-600 dark:text-slate-400 text-[11px] leading-relaxed">
+                {rawFilesFound}/{rawFilesTotal} raw CSV files detected in <code className="text-indigo-600 dark:text-indigo-400">data/raw/</code>. Use <code className="text-slate-700 dark:text-slate-300">scripts/download_dataset.py</code> to download Olist data.
               </p>
             </div>
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800">
-              <span className="font-semibold text-slate-200 block mb-1">2. Ingestion Pipeline</span>
-              <p className="text-slate-400 text-[11px] leading-relaxed">
-                Run <code className="text-indigo-400">python scripts/ingest_data.py</code> to load real raw files directly into PostgreSQL.
+            <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#0B1120] border border-slate-200 dark:border-[#263449]">
+              <span className="font-semibold text-slate-800 dark:text-slate-200 block mb-1">2. Ingestion Pipeline</span>
+              <p className="text-slate-600 dark:text-slate-400 text-[11px] leading-relaxed">
+                Run <code className="text-indigo-600 dark:text-indigo-400">python scripts/ingest_data.py</code> to load real raw files directly into PostgreSQL.
               </p>
             </div>
-            <div className="p-4 rounded-xl bg-slate-950 border border-slate-800">
-              <span className="font-semibold text-slate-200 block mb-1">3. Analytics Modules</span>
-              <p className="text-slate-400 text-[11px] leading-relaxed">
+            <div className="p-4 rounded-xl bg-slate-50 dark:bg-[#0B1120] border border-slate-200 dark:border-[#263449]">
+              <span className="font-semibold text-slate-800 dark:text-slate-200 block mb-1">3. Analytics Modules</span>
+              <p className="text-slate-600 dark:text-slate-400 text-[11px] leading-relaxed">
                 RFM segmentation, sales intelligence, and forecasting will compute on real ingested data in subsequent stages.
               </p>
             </div>
           </div>
         </div>
       ) : (
-        <div className="p-6 rounded-2xl bg-emerald-950/20 border border-emerald-800/40 text-emerald-300 text-xs flex items-center justify-between">
+        <div className="p-6 rounded-2xl bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800/40 text-emerald-800 dark:text-emerald-300 text-xs flex items-center justify-between">
           <span>Active dataset detected: {totalRecords.toLocaleString()} verified rows in database.</span>
-          <Link to="/data-quality" className="underline font-semibold hover:text-white">
+          <Link to="/data-quality" className="underline font-semibold hover:text-emerald-900 dark:hover:text-white">
             Inspect Schema Completeness
           </Link>
         </div>
       )}
 
       {/* Architecture & Foundation Components Checklist */}
-      <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6">
-        <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2">
-          <ShieldCheck className="h-4 w-4 text-indigo-400" />
+      <div className="bg-white dark:bg-[#172033]/60 border border-slate-200 dark:border-[#263449] rounded-2xl p-6 shadow-sm">
+        <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+          <ShieldCheck className="h-4 w-4 text-indigo-500" />
           Foundation Architecture Status (Stage 1)
         </h3>
 
@@ -161,14 +160,14 @@ export const ExecutiveOverview: React.FC = () => {
             { name: 'Data Quality Auditing', status: 'Real-Time', detail: 'Queries actual table counts, columns, and null rates' },
             { name: 'Docker Orchestration', status: 'Configured', detail: 'Multi-service configuration for DB, Backend, and Frontend' },
           ].map((item, idx) => (
-            <div key={idx} className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 flex flex-col justify-between">
+            <div key={idx} className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#0B1120] border border-slate-200 dark:border-[#263449] flex flex-col justify-between">
               <div className="flex items-center justify-between gap-2">
-                <span className="text-xs font-medium text-slate-200">{item.name}</span>
-                <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-950/60 text-emerald-400 border border-emerald-800/40">
+                <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">{item.name}</span>
+                <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/40">
                   {item.status}
                 </span>
               </div>
-              <p className="text-[11px] text-slate-400 mt-2">{item.detail}</p>
+              <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-2">{item.detail}</p>
             </div>
           ))}
         </div>
