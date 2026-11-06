@@ -71,7 +71,7 @@ export const HeroSection: React.FC = () => {
               <a
                 href="#features"
                 onClick={handleExploreClick}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 text-xs sm:text-sm font-semibold rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100 shadow-md transition-all hover:scale-[1.02]"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 text-xs sm:text-sm font-semibold rounded-xl bg-white dark:bg-[#172033] text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-[#263449] hover:bg-slate-50 dark:hover:bg-[#1E293B] shadow-sm transition-all hover:scale-[1.02]"
               >
                 Explore Platform
                 <ChevronRight className="h-4 w-4" />

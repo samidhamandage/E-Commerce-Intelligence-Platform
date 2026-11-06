@@ -11,18 +11,33 @@
     <script>
       (function() {
         try {
-          var saved = localStorage.getItem('platform_theme');
-          var theme = saved || 'dark';
-          if (theme === 'dark') {
+          var saved = localStorage.getItem('theme') || localStorage.getItem('platform_theme');
+          var isDark = saved ? saved === 'dark' : true;
+          if (isDark) {
             document.documentElement.classList.add('dark');
             document.documentElement.classList.remove('light');
+            document.documentElement.setAttribute('data-theme', 'dark');
+            document.documentElement.style.colorScheme = 'dark';
           } else {
             document.documentElement.classList.remove('dark');
             document.documentElement.classList.add('light');
+            document.documentElement.setAttribute('data-theme', 'light');
+            document.documentElement.style.colorScheme = 'light';
           }
         } catch (e) {}
       })();
     </script>
+    <style>
+      /* Prevent white-screen flash when loading in Dark Mode */
+      html.dark, html.dark body {
+        background-color: #0B1120 !important;
+        color: #F8FAFC !important;
+      }
+      html.light, html.light body {
+        background-color: #F8FAFC !important;
+        color: #0F172A !important;
+      }
+    </style>
   </head>
   <body class="bg-[#F8FAFC] text-[#0F172A] dark:bg-[#0B1120] dark:text-[#F8FAFC] antialiased font-[Inter,sans-serif] selection:bg-indigo-600 selection:text-white transition-colors duration-200">
     <div id="root"></div>

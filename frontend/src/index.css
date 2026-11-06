@@ -35,34 +35,148 @@
   }
 }
 
-/* Light Theme Slate Adapters for Dashboard Pages */
-html:not(.dark) .bg-slate-900\/60,
-html:not(.dark) .bg-slate-900\/70,
-html:not(.dark) .bg-slate-900\/80,
-html:not(.dark) .bg-slate-900 {
-  background-color: #FFFFFF;
+/* ==========================================================================
+   Comprehensive Theme Styles (Light & Dark Consistency Across Platform)
+   ========================================================================== */
+
+/* Guaranteed Page Background and Text Colors */
+html.dark,
+html.dark body,
+html.dark #root > div {
+  background-color: #0B1120 !important;
+  color: #F8FAFC !important;
 }
 
+html:not(.dark),
+html.light,
+html.light body,
+html:not(.dark) body,
+html.light #root > div,
+html:not(.dark) #root > div {
+  background-color: #F8FAFC !important;
+  color: #0F172A !important;
+}
+
+/* Light Theme Card & Container Adapters for Dashboard Pages */
+html:not(.dark) div.bg-slate-900\/60,
+html:not(.dark) div.bg-slate-900\/70,
+html:not(.dark) div.bg-slate-900\/80,
+html:not(.dark) div.bg-slate-900,
+html.light div.bg-slate-900\/60,
+html.light div.bg-slate-900\/70,
+html.light div.bg-slate-900\/80,
+html.light div.bg-slate-900 {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05) !important;
+}
+
+html:not(.dark) div.bg-slate-950,
+html:not(.dark) div.bg-slate-950\/40,
+html:not(.dark) div.bg-slate-950\/60,
+html:not(.dark) div.bg-slate-950\/80,
+html.light div.bg-slate-950,
+html.light div.bg-slate-950\/40,
+html.light div.bg-slate-950\/60,
+html.light div.bg-slate-950\/80 {
+  background-color: #F8FAFC !important;
+  border-color: #E2E8F0 !important;
+}
+
+html:not(.dark) div.bg-slate-800,
+html:not(.dark) div.bg-slate-800\/60,
+html:not(.dark) div.bg-slate-800\/70,
+html.light div.bg-slate-800,
+html.light div.bg-slate-800\/60,
+html.light div.bg-slate-800\/70 {
+  background-color: #F1F5F9 !important;
+  border-color: #E2E8F0 !important;
+}
+
+/* Light Theme Border Adaptations */
 html:not(.dark) .border-slate-800,
 html:not(.dark) .border-slate-800\/60,
-html:not(.dark) .border-slate-800\/80 {
-  border-color: #E2E8F0;
+html:not(.dark) .border-slate-800\/80,
+html:not(.dark) .border-slate-700,
+html.light .border-slate-800,
+html.light .border-slate-800\/60,
+html.light .border-slate-800\/80,
+html.light .border-slate-700 {
+  border-color: #E2E8F0 !important;
 }
 
-html:not(.dark) .bg-slate-950,
-html:not(.dark) .bg-slate-950\/40,
-html:not(.dark) .bg-slate-950\/60,
-html:not(.dark) .bg-slate-950\/80 {
-  background-color: #F8FAFC;
+html:not(.dark) .divide-slate-800,
+html:not(.dark) .divide-slate-800\/60,
+html:not(.dark) .divide-slate-800\/80,
+html.light .divide-slate-800,
+html.light .divide-slate-800\/60,
+html.light .divide-slate-800\/80 {
+  border-color: #E2E8F0 !important;
 }
 
-html:not(.dark) .bg-slate-800 {
-  background-color: #F1F5F9;
+/* Light Theme Typography Adaptations for Headings & Content in Cards */
+html:not(.dark) div.bg-slate-900 h1,
+html:not(.dark) div.bg-slate-900 h2,
+html:not(.dark) div.bg-slate-900 h3,
+html:not(.dark) div.bg-slate-900 h4,
+html:not(.dark) div.bg-slate-900\/60 h1,
+html:not(.dark) div.bg-slate-900\/60 h2,
+html:not(.dark) div.bg-slate-900\/60 h3,
+html:not(.dark) div.bg-slate-900\/60 h4,
+html.light div.bg-slate-900 h1,
+html.light div.bg-slate-900 h2,
+html.light div.bg-slate-900 h3,
+html.light div.bg-slate-900 h4,
+html.light div.bg-slate-900\/60 h1,
+html.light div.bg-slate-900\/60 h2,
+html.light div.bg-slate-900\/60 h3,
+html.light div.bg-slate-900\/60 h4 {
+  color: #0F172A !important;
 }
 
-html:not(.dark) .bg-slate-800\/60,
-html:not(.dark) .bg-slate-800\/70 {
-  background-color: #F1F5F9;
+html:not(.dark) .text-slate-100:not([class*="dark:"]),
+html.light .text-slate-100:not([class*="dark:"]) {
+  color: #0F172A !important;
+}
+
+html:not(.dark) .text-slate-200:not([class*="dark:"]),
+html.light .text-slate-200:not([class*="dark:"]) {
+  color: #1E293B !important;
+}
+
+html:not(.dark) table.text-slate-300,
+html:not(.dark) table .text-slate-300,
+html.light table.text-slate-300,
+html.light table .text-slate-300 {
+  color: #334155 !important;
+}
+
+html:not(.dark) table thead.bg-slate-950\/80,
+html.light table thead.bg-slate-950\/80 {
+  background-color: #F8FAFC !important;
+  color: #64748B !important;
+  border-color: #E2E8F0 !important;
+}
+
+html:not(.dark) table th,
+html.light table th {
+  color: #475569 !important;
+}
+
+/* Light Theme Form Controls (Selects, Inputs) */
+html:not(.dark) select.bg-slate-900,
+html:not(.dark) select.bg-slate-800,
+html.light select.bg-slate-900,
+html.light select.bg-slate-800 {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+  border-color: #CBD5E1 !important;
+}
+
+html:not(.dark) select option,
+html.light select option {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
 }
 
 /* Global Recharts Theme Synchronization */
